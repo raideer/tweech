@@ -1,0 +1,19 @@
+{
+    "name": "raideer/tweech",
+    "description": "Twitch.tv bot framework",
+    "authors": [
+        {
+            "name": "Raideer",
+            "email": "raideer@5v5.lv"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/raideer/tweech-framework"
+        }
+    ],
+    "require": {
+      "Raideer/tweech-framework": "dev-master"
+    }
+}
