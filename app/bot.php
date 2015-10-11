@@ -2,6 +2,6 @@
 
 $client = $app['client'];
 
-// $client->listen("tweech.connected", function($event){
-//   echo "connected";
-// });
+$client->listen("irc.message.RPL_ENDOFMOTD", function($event){
+    // echo "End of MOTD\n";
+});
