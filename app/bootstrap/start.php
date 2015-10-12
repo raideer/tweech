@@ -18,6 +18,8 @@ use Raideer\Tweech\Config\Config;
 use Raideer\Tweech\Config\ConfigLoader;
 use Raideer\Tweech\Facades\Facade;
 use Raideer\Tweech\Facades\FacadeLoader;
+use Raideer\Tweech\Util\Logger;
+use Monolog\Logger as MonologLogger;
 
 /**
  * Save application paths to the container
@@ -39,6 +41,18 @@ $app->addToInstance('config', new Config($configLoader));
  * Set the default timezone
  */
 date_default_timezone_set($app['config']['app.timezone']);
+
+$app->addToInstance('logger', new Logger(
+                                  new MonologLogger('Tweech')
+                              ));
+
+
+if($app['config']['app.dailyLogs'])
+{
+  $app['logger']->logToDailyFiles($app['path.app'] . "/logs/tweech.log", $['config']['app.dailyLogLimit']);
+}else{
+  $app['logger']->logToFiles($app['path.app'] . "/logs/tweech.log");
+}
 
 /**
  * Add the application instance to the facades
