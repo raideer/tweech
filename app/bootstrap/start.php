@@ -9,9 +9,39 @@ error_reporting(E_ALL);
 $app = new Raideer\Tweech\Tweech;
 
 /**
+ * Binding the app to the container so we can access the App facade
+ */
+$app->addToInstance('app', $app);
+
+
+use Raideer\Tweech\Config\Config;
+use Raideer\Tweech\Config\ConfigLoader;
+use Raideer\Tweech\Facades\Facade;
+use Raideer\Tweech\Facades\FacadeLoader;
+
+/**
  * Save application paths to the container
  */
 $app->saveApplicationPaths(require __DIR__ . "/paths.php");
+
+/**
+ * Creates a new config loader and specifies the config directory
+ * @var ConfigLoader
+ */
+$configLoader = new ConfigLoader($app['path.config']);
+
+/**
+ * Attaching the Config class to the container
+ */
+$app->addToInstance('config', new Config($configLoader));
+
+/**
+ * Add the application instance to the facades
+ */
+Facade::setApplication($app);
+
+$loader = new FacadeLoader($app['config']['facades']);
+$loader->load();
 
 /**
  * Runs the contents when the app has booted
