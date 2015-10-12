@@ -2,6 +2,22 @@
 
 return array(
   "timezone" => "UTC",
+
+  /**
+   * Creates a new log file every dailyLogs
+   *
+   * If false then everything will be logged in a single file
+   */
+  "dailyLogs" => true,
+
+  /**
+   * Specify the file limit for daily logs
+   * (eg. if limit is 5 then the log folder will only hold logs from the past 5 days)
+   *
+   * 0 for unlimited
+   */
+  "dailyLogLimit" => 0,
+
   "connection" => array(
       /**
        * Specify the twitch username for the bot
