@@ -36,6 +36,11 @@ $configLoader = new ConfigLoader($app['path.config']);
 $app->addToInstance('config', new Config($configLoader));
 
 /**
+ * Set the default timezone
+ */
+date_default_timezone_set($app['config']['app.timezone']);
+
+/**
  * Add the application instance to the facades
  */
 Facade::setApplication($app);
