@@ -1,7 +1,24 @@
 <?php
-
 $client = $app['client'];
 
-$client->listen("irc.message.RPL_ENDOFMOTD", function($event){
-    // echo "End of MOTD\n";
+/**
+ * Run when the client has connected to the IRC server
+ */
+$client->whenLogged(function() use($client){
+
+  /**
+   * Join a channel
+   */
+  $client->command("JOIN", "#lirik");
+});
+
+/**
+ * Listen to the 'irc.message.PRIVMSG' event
+ * @var Raideer\Tweech\Event\IrcMessageEvent
+ */
+$client->listen("irc.message.PRIVMSG", function($event){
+
+    $message = $event->getMessage();
+
+    echo $message['username'] . ": " . $message['message'] . "\n";
 });
