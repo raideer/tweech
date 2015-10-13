@@ -17,6 +17,11 @@ class Command implements CommandInterface{
     return null;
   }
 
+  public function getCommandIdentifier(){
+
+    return array(".", "!");
+  }
+
   /**
    * Runs when the command has been typed in
    * @param  Raideer\Tweech\Event\Event $message Returns the event with the details
