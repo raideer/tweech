@@ -1,5 +1,6 @@
 <?php
-error_reporting(E_ALL);
+ini_set('display_errors', 1);
+error_reporting(-1);
 
 /**
  * Create the main Tweech class
@@ -37,6 +38,12 @@ $configLoader = new ConfigLoader($app['path.config']);
 $app->addToInstance('config', new Config($configLoader));
 
 /**
+ * Add the application instance to the facade
+ */
+Facade::setApplication($app);
+$loader = with(new FacadeLoader($app['config']['facades']))->load();
+
+/**
  * Set the default timezone
  */
 date_default_timezone_set($app['config']['app.timezone']);
@@ -49,22 +56,10 @@ if($app['config']['app.dailyLogs'])
 {
   $app['logger']->logToDailyFiles(
                     $app['path.app'] . "/logs/tweech.log",
-                    $app['config']['app.dailyLogLimit']
-                  );
+                    $app['config']['app.dailyLogLimit']);
 }else{
-  $app['logger']->logToFiles(
-                    $app['path.app'] . "/logs/tweech.log"
-                  );
+  $app['logger']->logToFiles($app['path.app'] . "/logs/tweech.log");
 }
-
-
-/**
- * Add the application instance to the facades
- */
-Facade::setApplication($app);
-
-$loader = new FacadeLoader($app['config']['facades']);
-$loader->load();
 
 /**
  * Runs the contents when the app has booted
