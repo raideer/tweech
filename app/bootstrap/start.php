@@ -1,5 +1,4 @@
 <?php
-
 error_reporting(E_ALL);
 
 /**
@@ -46,13 +45,18 @@ $app->addToInstance('logger', new Logger(
                                   new MonologLogger('Tweech')
                               ));
 
-
 if($app['config']['app.dailyLogs'])
 {
-  $app['logger']->logToDailyFiles($app['path.app'] . "/logs/tweech.log", $['config']['app.dailyLogLimit']);
+  $app['logger']->logToDailyFiles(
+                    $app['path.app'] . "/logs/tweech.log",
+                    $app['config']['app.dailyLogLimit']
+                  );
 }else{
-  $app['logger']->logToFiles($app['path.app'] . "/logs/tweech.log");
+  $app['logger']->logToFiles(
+                    $app['path.app'] . "/logs/tweech.log"
+                  );
 }
+
 
 /**
  * Add the application instance to the facades
