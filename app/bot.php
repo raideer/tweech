@@ -10,7 +10,6 @@ Client::whenLogged(function()
 
   Client::command("JOIN", "#lirik");
 
-  Logger::info('Joined liriks channel');
 });
 
 /**
