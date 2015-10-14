@@ -7,19 +7,19 @@ Client::whenLogged(function()
   /**
    * Join a channel
    */
+  Client::joinChannel("lirik");
 
-  Client::command("JOIN", "#lirik");
-
+  /**
+   * Put a Kappa in the chat
+   */
+  Client::chat("Kappa");
 });
 
-
 /**
- * Listen to the 'irc.message.PRIVMSG' event
- * @var Raideer\Tweech\Event\IrcMessageEvent
+ * Listen to the 'chat.message' event
+ * @var Raideer\Tweech\Event\ChatMessageEvent
  */
-Client::listen("irc.message.PRIVMSG", function($event)
+Client::listen("chat.message", function($event)
 {
-    $message = $event->getMessage();
-
-    echo $message['username'] . ": " . $message['message'] . "\n";
+  echo $event->getSender() . ": " .$event->getMessage(). "\n";
 });
