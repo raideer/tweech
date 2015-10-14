@@ -12,6 +12,7 @@ Client::whenLogged(function()
 
 });
 
+
 /**
  * Listen to the 'irc.message.PRIVMSG' event
  * @var Raideer\Tweech\Event\IrcMessageEvent
