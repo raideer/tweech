@@ -1,6 +1,8 @@
 {
     "name": "raideer/tweech",
     "description": "Twitch.tv bot framework",
+    "keywords": ["framework", "tweech", "php"],
+    "license": "MIT",
     "authors": [
         {
             "name": "Raideer",
@@ -8,6 +10,7 @@
         }
     ],
     "require": {
+      "php": ">=5.5.0",
       "raideer/tweech-framework": "dev-master"
     }
 }
