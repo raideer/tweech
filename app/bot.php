@@ -14,7 +14,7 @@ Client::whenLogged(function()
 
   $lirik = Client::joinChat("lirik");
   $lirik->read();
-
+  
 });
 
 /**
