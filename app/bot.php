@@ -9,12 +9,7 @@ Client::whenLogged(function()
    */
   $chat = Client::joinChat("raideeeeer");
   $chat->read();
-  $chat->send("Tweech has joined Kappa");
 
-
-  $lirik = Client::joinChat("lirik");
-  $lirik->read();
-  
 });
 
 /**
