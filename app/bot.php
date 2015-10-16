@@ -7,12 +7,14 @@ Client::whenLogged(function()
   /**
    * Join a channel
    */
-  Client::joinChannel("lirik");
+  $chat = Client::joinChat("raideeeeer");
+  $chat->read();
+  $chat->send("Tweech has joined Kappa");
 
-  /**
-   * Put a Kappa in the chat
-   */
-  Client::chat("Kappa");
+
+  $lirik = Client::joinChat("lirik");
+  $lirik->read();
+
 });
 
 /**
@@ -21,5 +23,5 @@ Client::whenLogged(function()
  */
 Client::listen("chat.message", function($event)
 {
-  echo $event->getSender() . ": " .$event->getMessage(). "\n";
+  echo $event->getChat()->getName() . " \t ". $event->getSender() .": " .$event->getMessage(). "\n";
 });
