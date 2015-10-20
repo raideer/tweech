@@ -3,11 +3,14 @@
 class TweechCommand extends ChatCommand{
 
   public function getCommand(){
-
     return "tweech";
   }
 
-  public function run($event){
+  public function getCommandIdentifier(){
+    return array('!');
+  }
+
+  public function run($args){
 
     echo "Hello";
   }
