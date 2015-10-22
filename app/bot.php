@@ -1,4 +1,6 @@
 <?php
+
+require_once __DIR__ . '/commands/TweechCommand.php';
 /**
  * Gets executed when the client has connected to the IRC server
  */
@@ -8,6 +10,7 @@ Client::whenLogged(function()
    * Join a channel
    */
   $chat = Client::joinChat("raideeeeer");
+  $chat->addCommand(new TweechCommand);
   $chat->read();
 
 });
