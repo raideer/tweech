@@ -2,11 +2,6 @@
 
 class TweechCommand implements \Raideer\Tweech\Command\CommandInterface{
 
-  public function getCommandIdentifier()
-  {
-    return array('!');
-  }
-
   public function getCommand()
   {
     return "tweech";
