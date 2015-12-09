@@ -1,4 +1,6 @@
 <?php
+
+require_once __DIR__ . '/commands/TweechCommand.php';
 /**
  * Gets executed when the client has connected to the IRC server
  */
@@ -7,7 +9,9 @@ Client::whenLogged(function()
   /**
    * Join a channel
    */
-  $chat = Client::joinChat("raideeeeer");
+  
+  $chat = Client::joinChat("lirik");
+  $chat->addCommand(new TweechCommand);
   $chat->read();
 
 });
@@ -16,7 +20,7 @@ Client::whenLogged(function()
  * Listen to the 'chat.message' event
  * @var Raideer\Tweech\Event\ChatMessageEvent
  */
-Client::listen("chat.message", function($event)
+Client::listen("irc.message", function($event)
 {
-  echo $event->getChat()->getName() . " \t ". $event->getSender() .": " .$event->getMessage(). "\n";
+  print_r($event->getResponse());
 });
