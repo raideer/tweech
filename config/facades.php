@@ -1,8 +1,9 @@
 <?php
 
 return array(
-  'Application' => 'Raideer\Tweech\Facades\App',
-  'Client' => 'Raideer\Tweech\Facades\Client',
-  'Logger' => 'Raideer\Tweech\Facades\Logger',
-  'Config' => 'Raideer\Tweech\Facades\Config'
+  'Api'           => 'Raideer\Tweech\Facades\Api',
+  'Application'   => 'Raideer\Tweech\Facades\App',
+  'Client'        => 'Raideer\Tweech\Facades\Client',
+  'Config'        => 'Raideer\Tweech\Facades\Config',
+  'Logger'        => 'Raideer\Tweech\Facades\Logger',
 );
