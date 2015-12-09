@@ -14,12 +14,13 @@ $app = new Raideer\Tweech\Tweech;
 $app->addToInstance('app', $app);
 
 
-use Raideer\Tweech\Config\Config;
-use Raideer\Tweech\Config\ConfigLoader;
-use Raideer\Tweech\Facades\Facade;
 use Raideer\Tweech\Facades\FacadeLoader;
-use Raideer\Tweech\Util\Logger;
+use Raideer\Tweech\Config\ConfigLoader;
 use Monolog\Logger as MonologLogger;
+use Raideer\Tweech\Facades\Facade;
+use Raideer\Tweech\Config\Config;
+use Raideer\Tweech\Util\Logger;
+use Raideer\Tweech\Api\Wrapper;
 
 /**
  * Save application paths to the container
@@ -51,7 +52,6 @@ date_default_timezone_set($app['config']['app.timezone']);
 $app->addToInstance('logger', new Logger(
                                   new MonologLogger('Tweech')
                               ));
-
 if($app['config']['app.dailyLogs'])
 {
   $app['logger']->logToDailyFiles(
@@ -60,6 +60,12 @@ if($app['config']['app.dailyLogs'])
 }else{
   $app['logger']->logToFiles($app['path.app'] . "/logs/tweech.log");
 }
+
+/**
+ * Attaching the Twitch API Wrapper to the container
+ * $app['api']->method() or Api::method();
+ */
+$app->addToInstance('api', new Wrapper);
 
 /**
  * Runs the contents when the app has booted
