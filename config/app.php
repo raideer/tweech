@@ -4,15 +4,14 @@ return array(
   "timezone" => "UTC",
 
   /**
-   * Creates a new log file every dailyLogs
+   * Creates a new log file every day
    *
-   * If false then everything will be logged in a single file
+   * If false then everything will be logged into a single file
    */
   "dailyLogs" => true,
 
   /**
-   * Specify the file limit for daily logs
-   * (eg. if limit is 5 then the log folder will only hold logs from the past 5 days)
+   * Specify the file amount limit for daily logs
    *
    * 0 for unlimited
    */
