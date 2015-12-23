@@ -9,7 +9,7 @@ Client::whenLogged(function()
 {
 
   /**
-   * Registering a EventSubscriber
+   * Registering an MotdSubscriber (see app/subsribers/MotdSubscriber)
    */
   Client::registerEventSubscriber(new MotdSubscriber);
 
@@ -30,5 +30,5 @@ Client::whenLogged(function()
  */
 Client::listen("irc.message", function($event)
 {
-  print_r($event->getResponse());
+  // print_r($event->getResponse());
 });
