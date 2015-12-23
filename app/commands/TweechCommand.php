@@ -1,4 +1,5 @@
 <?php
+namespace App\Commands;
 
 class TweechCommand implements \Raideer\Tweech\Command\CommandInterface{
 
