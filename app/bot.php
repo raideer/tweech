@@ -1,20 +1,28 @@
 <?php
+use App\Commands\TweechCommand;
+use App\Subscribers\MotdSubscriber;
 
-require_once __DIR__ . '/commands/TweechCommand.php';
 /**
  * Gets executed when the client has connected to the IRC server
  */
 Client::whenLogged(function()
 {
+
   /**
-   * Join a channel
+   * Registering a EventSubscriber
    */
-  
-  $chat = Client::joinChat("lirik");
+  Client::registerEventSubscriber(new MotdSubscriber);
+
+  /**
+   * Joining a channel/chat
+   */
+  $chat = Client::joinChat("raideeeeer");
   $chat->addCommand(new TweechCommand);
   $chat->read();
 
 });
+
+
 
 /**
  * Listen to the 'chat.message' event
