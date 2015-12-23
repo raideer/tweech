@@ -1,7 +1,7 @@
 <?php
-use Raideer\Tweech\Subscribers\EventSubscriber;
+namespace App\Subscribers;
 
-class MotdSubscriber extends EventSubscriber{
+class MotdSubscriber extends Subscriber{
 
   public static function getSubscribedEvents(){
     return array(
@@ -13,7 +13,8 @@ class MotdSubscriber extends EventSubscriber{
 
   public function receivedMessageOfTheDay($event){
 
-    // echo "Hello Twitch! \n";
+    echo "Hello Twitch! \n";
+
   }
 
 }
