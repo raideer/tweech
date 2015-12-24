@@ -4,6 +4,6 @@ namespace App\Subscribers;
 
 use Raideer\Tweech\Subscribers\EventSubscriber;
 
-class Subscriber extends EventSubscriber{
+abstract class Subscriber extends EventSubscriber{
 
 }
