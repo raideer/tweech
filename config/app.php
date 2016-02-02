@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
   "timezone" => "UTC",
 
   /**
@@ -17,7 +17,7 @@ return array(
    */
   "dailyLogLimit" => 0,
 
-  "connection" => array(
+  "connection" => [
       /**
        * Specify the twitch username for the bot
        */
@@ -33,12 +33,20 @@ return array(
       /**
        * Irc server information
        */
-      "ircServer" => array(
+      "ircServer" => [
 
         "hostname" => "irc.twitch.tv",
         "port" => 6667
 
-      ),
-  ),
+      ],
+  ],
 
-);
+  "facades" => [
+    'Api'           => \Raideer\Tweech\Facades\Api::class,
+    'Application'   => \Raideer\Tweech\Facades\App::class,
+    'Client'        => \Raideer\Tweech\Facades\Client::class,
+    'Config'        => \Raideer\Tweech\Facades\Config::class,
+    'Logger'        => \Raideer\Tweech\Facades\Logger::class,
+  ],
+
+];

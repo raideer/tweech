@@ -1,6 +1,6 @@
 <?php
 ini_set('display_errors', 1);
-error_reporting(-1);
+error_reporting(E_ALL);
 
 /**
  * Create the main Tweech class
@@ -13,14 +13,13 @@ $app = new Raideer\Tweech\Tweech;
  */
 $app->addToInstance('app', $app);
 
-
 use Raideer\Tweech\Facades\FacadeLoader;
 use Raideer\Tweech\Config\ConfigLoader;
 use Monolog\Logger as MonologLogger;
 use Raideer\Tweech\Facades\Facade;
 use Raideer\Tweech\Config\Config;
 use Raideer\Tweech\Util\Logger;
-use Raideer\Tweech\Api\Wrapper;
+use Raideer\TwitchApi\Wrapper; //github.com/raideer/twitch-api
 
 /**
  * Save application paths to the container
@@ -61,11 +60,20 @@ if($app['config']['app.dailyLogs'])
   $app['logger']->logToFiles($app['path.app'] . "/logs/tweech.log");
 }
 
+set_error_handler(function($errno, $errstr, $errfile, $errline){
+  $app['logger']->error(
+    "[$errno] $errstr in $errfile on line $errline"
+  );
+}, E_ALL);
+
+$app['logger']->info("Logger loaded");
+
 /**
  * Attaching the Twitch API Wrapper to the container
  * $app['api']->method() or Api::method();
  */
-$app->addToInstance('api', new Wrapper);
+
+$app->addToInstance('api', new Wrapper(new GuzzleHttp\Client));
 
 /**
  * Runs the contents when the app has booted
@@ -75,6 +83,10 @@ $app->whenBooted(function() use($app){
 
   $botClass = $app['path.app'] . "/bot.php";
   if(file_exists($botClass)) require $botClass;
+
+  Client::listen("irc.message.001", function(){
+    Logger::info("Successfuly joined the IRC server");
+  });
 
 });
 

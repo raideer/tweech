@@ -30,5 +30,5 @@ Client::whenLogged(function()
  */
 Client::listen("irc.message", function($event)
 {
-  // print_r($event->getResponse());
+  print_r($event->getResponse());
 });
