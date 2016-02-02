@@ -42,7 +42,7 @@ $app->addToInstance('config', new Config($configLoader));
  * Add the application instance to the facade
  */
 Facade::setApplication($app);
-$loader = with(new FacadeLoader($app['config']['facades']))->load();
+$loader = with(new FacadeLoader($app['config']['app.facades']))->load();
 
 /**
  * Set the default timezone
