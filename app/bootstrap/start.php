@@ -11,7 +11,7 @@ $app = new Raideer\Tweech\Tweech;
 /**
  * Binding the app to the container so we can access the App facade
  */
-$app->addToInstance('app', $app);
+$app->instance('app', $app);
 
 use Raideer\Tweech\Facades\FacadeLoader;
 use Raideer\Tweech\Config\ConfigLoader;
@@ -35,7 +35,7 @@ $configLoader = new ConfigLoader($app['path.config']);
 /**
  * Attaching the Config class to the container
  */
-$app->addToInstance('config', new Config($configLoader));
+$app->instance('config', new Config($configLoader));
 
 /**
  * Add the application instance to the facade
@@ -48,7 +48,7 @@ $loader = with(new FacadeLoader($app['config']['app.facades']))->load();
  */
 date_default_timezone_set($app['config']['app.timezone']);
 
-$app->addToInstance('logger', new Logger(
+$app->instance('logger', new Logger(
                                   new MonologLogger('Tweech')
                               ));
 if($app['config']['app.dailyLogs'])
@@ -61,6 +61,7 @@ if($app['config']['app.dailyLogs'])
 }
 
 set_error_handler(function($errno, $errstr, $errfile, $errline){
+  echo "[$errno] $errstr in $errfile on line $errline" . PHP_EOL;
   $app['logger']->error(
     "[$errno] $errstr in $errfile on line $errline"
   );
@@ -73,7 +74,7 @@ $app['logger']->info("Logger loaded");
  * $app['api']->method() or Api::method();
  */
 
-$app->addToInstance('api', new Wrapper(new GuzzleHttp\Client));
+$app->instance('api', new Wrapper(new GuzzleHttp\Client));
 
 /**
  * Runs the contents when the app has booted
