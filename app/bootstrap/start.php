@@ -11,7 +11,7 @@ $app = new Raideer\Tweech\Tweech;
 /**
  * Binding the app to the container so we can access the App facade
  */
-$app->instance('app', $app);
+$app->applyInstance('app', $app);
 
 use Raideer\Tweech\Facades\FacadeLoader;
 use Raideer\Tweech\Config\ConfigLoader;
@@ -35,7 +35,7 @@ $configLoader = new ConfigLoader($app['path.config']);
 /**
  * Attaching the Config class to the container
  */
-$app->instance('config', new Config($configLoader));
+$app->applyInstance('config', new Config($configLoader));
 
 /**
  * Add the application instance to the facade
@@ -48,7 +48,7 @@ $loader = with(new FacadeLoader($app['config']['app.facades']))->load();
  */
 date_default_timezone_set($app['config']['app.timezone']);
 
-$app->instance('logger', new Logger(
+$app->applyInstance('logger', new Logger(
                                   new MonologLogger('Tweech')
                               ));
 if($app['config']['app.dailyLogs'])
@@ -67,14 +67,14 @@ set_error_handler(function($errno, $errstr, $errfile, $errline){
   );
 }, E_ALL);
 
-$app['logger']->info("Logger loaded");
+$app['logger']->info("------ Logger loaded ------");
 
 /**
  * Attaching the Twitch API Wrapper to the container
  * $app['api']->method() or Api::method();
  */
 
-$app->instance('api', new Wrapper(new GuzzleHttp\Client));
+$app->applyInstance('api', new Wrapper(new GuzzleHttp\Client));
 
 /**
  * Runs the contents when the app has booted
@@ -85,8 +85,8 @@ $app->whenBooted(function() use($app){
   $botClass = $app['path.app'] . "/bot.php";
   if(file_exists($botClass)) require $botClass;
 
-  Client::listen("irc.message.001", function(){
-    Logger::info("Successfuly joined the IRC server");
+  $app['client']->listen("irc.message.RPL_WELCOME", function() use($app){
+    $app['logger']->info("Successfuly joined the IRC server");
   });
 
 });
