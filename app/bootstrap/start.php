@@ -54,10 +54,10 @@ $app->applyInstance('logger', new Logger(
 if($app['config']['app.dailyLogs'])
 {
   $app['logger']->logToDailyFiles(
-                    $app['path.app'] . "/logs/tweech.log",
+                    $app['path.storage'] . "/logs/tweech.log",
                     $app['config']['app.dailyLogLimit']);
 }else{
-  $app['logger']->logToFiles($app['path.app'] . "/logs/tweech.log");
+  $app['logger']->logToFiles($app['path.storage'] . "/logs/tweech.log");
 }
 
 set_error_handler(function($errno, $errstr, $errfile, $errline){
