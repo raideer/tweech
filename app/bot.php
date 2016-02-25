@@ -16,13 +16,11 @@ Client::whenLogged(function()
   /**
    * Joining a channel/chat
    */
-  $chat = Client::joinChat("raideeeeer");
-  $chat->addCommand(new TweechCommand);
+  $chat = Client::joinChat("lirik");
+  // $chat->addCommand(new TweechCommand);
   $chat->read();
 
 });
-
-
 
 /**
  * Listen to the 'chat.message' event
