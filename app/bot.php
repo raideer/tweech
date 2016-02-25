@@ -22,7 +22,7 @@ Client::whenLogged(function () {
 
 });
 
-/**
+/*
  * Listen to the 'chat.message' event
  * @var Raideer\Tweech\Event\ChatMessageEvent
  */

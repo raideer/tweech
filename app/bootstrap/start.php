@@ -52,12 +52,11 @@ date_default_timezone_set($app['config']['app.timezone']);
 $app->applyInstance('logger', new Logger(
                                   new MonologLogger('Tweech')
                               ));
-if($app['config']['app.dailyLogs'])
-{
+if ($app['config']['app.dailyLogs']) {
   $app['logger']->logToDailyFiles(
                     $app['path.storage'] . "/logs/tweech.log",
                     $app['config']['app.dailyLogLimit']);
-}else{
+} else {
   $app['logger']->logToFiles($app['path.storage'] . "/logs/tweech.log");
 }
 
