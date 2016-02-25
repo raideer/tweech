@@ -16,7 +16,7 @@ Client::whenLogged(function () {
   /*
    * Joining a channel/chat
    */
-  $chat = Client::joinChat("lirik");
+  $chat = Client::joinChat('lirik');
   // $chat->addCommand(new TweechCommand);
   $chat->read();
 

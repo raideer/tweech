@@ -53,18 +53,18 @@ $app->applyInstance('logger', new Logger(
                                   new MonologLogger('Tweech')
                               ));
 if ($app['config']['app.dailyLogs']) {
-  $app['logger']->logToDailyFiles(
+    $app['logger']->logToDailyFiles(
                     $app['path.storage'] . "/logs/tweech.log",
                     $app['config']['app.dailyLogLimit']);
 } else {
-  $app['logger']->logToFiles($app['path.storage'] . "/logs/tweech.log");
+    $app['logger']->logToFiles($app['path.storage'] . "/logs/tweech.log");
 }
 
 set_error_handler(function ($errno, $errstr, $errfile, $errline) {
-  echo "[$errno] $errstr in $errfile on line $errline".PHP_EOL;
-  $app['logger']->error(
+    echo "[$errno] $errstr in $errfile on line $errline".PHP_EOL;
+    $app['logger']->error(
     "[$errno] $errstr in $errfile on line $errline"
-  );
+    );
 }, E_ALL);
 
 $app['logger']->info('------ Logger loaded ------');
@@ -82,14 +82,14 @@ $app->applyInstance('api', new Wrapper(new GuzzleHttp\Client()));
  */
 $app->whenBooted(function () use ($app) {
 
-  $botClass = $app['path.app'].'/bot.php';
-  if (file_exists($botClass)) {
+    $botClass = $app['path.app'].'/bot.php';
+    if (file_exists($botClass)) {
       require $botClass;
-  }
+    }
 
-  $app['client']->listen('irc.message.RPL_WELCOME', function () use ($app) {
+    $app['client']->listen('irc.message.RPL_WELCOME', function () use ($app) {
     $app['logger']->info('Successfuly joined the IRC server');
-  });
+    });
 
 });
 
