@@ -4,18 +4,19 @@ namespace App\Commands;
 
 class TweechCommand implements \Raideer\Tweech\Command\CommandInterface
 {
-  public function getCommand()
-  {
+    public function getCommand()
+    {
     return "tweech";
-  }
+    }
 
-  public function run($event)
-  {
-    $message = $event->getCommand();
+    public function run($event)
+    {
+        $message = $event->getCommand();
 
-    if ($message == "Kappa") {
-      $event->getChat()->message("Hello! Kappa");
-    } else {
-      $event->getChat()->message("Hello!");
+        if ($message == "Kappa") {
+          $event->getChat()->message("Hello! Kappa");
+        } else {
+          $event->getChat()->message("Hello!");
+        }
     }
 }
