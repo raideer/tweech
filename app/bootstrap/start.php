@@ -88,7 +88,7 @@ $app->whenBooted(function () use ($app) {
     }
 
     $app['client']->listen('irc.message.RPL_WELCOME', function () use ($app) {
-    $app['logger']->info('Successfuly joined the IRC server');
+        $app['logger']->info('Successfuly joined the IRC server');
     });
 
 });
