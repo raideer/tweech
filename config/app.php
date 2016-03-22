@@ -35,7 +35,7 @@ return [
        */
       'ircServer' => [
 
-        'hostname' => 'irc.twitch.tv',
+        'hostname' => 'irc.chat.twitch.tv',
         'port'     => 6667,
 
       ],
