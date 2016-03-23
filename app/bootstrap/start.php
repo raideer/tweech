@@ -63,7 +63,7 @@ if ($app['config']['app.dailyLogs']) {
 set_error_handler(function ($errno, $errstr, $errfile, $errline) {
     echo "[$errno] $errstr in $errfile on line $errline".PHP_EOL;
     $app['logger']->error(
-    "[$errno] $errstr in $errfile on line $errline"
+        "[$errno] $errstr in $errfile on line $errline"
     );
 }, E_ALL);
 
