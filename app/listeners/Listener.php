@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Subscribers;
+namespace App\Listeners;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-abstract class Subscriber implements EventSubscriberInterface
+abstract class Listener implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {
