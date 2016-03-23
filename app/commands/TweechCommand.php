@@ -13,7 +13,9 @@ class TweechCommand implements \Raideer\Tweech\Command\CommandInterface
     {
         $message = $event->getCommand();
 
-        if ($message == 'Kappa') {
+        $sender = $event->getSender();
+
+        if ($sender->isSubscribed()) {
             $event->getChat()->message('Hello! Kappa');
         } else {
             $event->getChat()->message('Hello!');
