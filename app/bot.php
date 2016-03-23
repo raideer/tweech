@@ -1,24 +1,24 @@
 <?php
 
 use App\Commands\TweechCommand;
-use App\Subscribers\MotdSubscriber;
+use App\Listeners\MotdListener;
 
 /*
  * Gets executed when the client has connected to the IRC server
  */
 Client::whenLogged(function () {
 
-  /*
-   * Registering an MotdSubscriber (see app/subsribers/MotdSubscriber)
-   */
-  Client::registerEventSubscriber(new MotdSubscriber());
+    /*
+    * Registering an MotdListener (see app/listeners/MotdListener)
+    */
+    Client::registerEventListener(new MotdListener);
 
-  /*
-   * Joining a channel/chat
-   */
-  $chat = Client::joinChat('lirik');
-  // $chat->addCommand(new TweechCommand);
-  $chat->read();
+    /*
+    * Joining a channel/chat
+    */
+    $chat = Client::joinChat('lirik');
+    // $chat->addCommand(new TweechCommand);
+    $chat->read();
 
 });
 
@@ -26,6 +26,18 @@ Client::whenLogged(function () {
  * Listen to the 'chat.message' event
  * @var Raideer\Tweech\Event\ChatMessageEvent
  */
-Client::listen('irc.message', function ($event) {
-  print_r($event->getResponse());
+Client::listen('chat.message', function ($event) {
+    $sender = $event->getSender();
+
+    if ($sender->isSubscribed()) {
+        echo $event->getMessage() . PHP_EOL;
+    }
+});
+
+Client::listen('chat.subscription', function ($event) {
+    if ($event->isResub()) {
+        echo "\n---SOMEONE JUST RESUBSCRIBED---\n\n";
+    } else {
+        echo "\n---SOMEONE JUST SUBSCRIBED---\n\n";
+    }
 });
