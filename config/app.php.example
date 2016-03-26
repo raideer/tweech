@@ -21,14 +21,14 @@ return [
         /*
         * Specify the twitch username for the bot
         */
-        'username' => 'powerbot5000',
+        'username' => 'YourTwitchUsername',
 
         /*
         * Specify the Twitch chat OAuth password
         *
         * You can get your token here: http://www.twitchapps.com/tmi
         */
-        'oauth' => 'oauth:3b7hmz1kqf7ndt9olku1ghvqh7hknw',
+        'oauth' => 'yourOAuthPassword',
 
         /*
         * Irc server information

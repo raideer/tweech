@@ -1,6 +1,6 @@
 <?php
 
-use App\Commands\TweechCommand;
+use App\Commands\TestCommand;
 use App\Listeners\MotdListener;
 
 /*
@@ -13,12 +13,41 @@ Client::whenLogged(function () {
     */
     Client::registerEventListener(new MotdListener);
 
+    $channels = [
+        'sodapoppin',
+        'lirik',
+        'phantoml0rd',
+        'PsiSyndicate',
+        'AnomalyXd',
+        'Food',
+        'Yogscast',
+        'LyndonFPS',
+        'RiotGames',
+        'MultiplayEsports',
+        'CapcomFighters',
+        'DreadzTV',
+        'CopenhagenGamesCS',
+        'raideeeeer'
+    ];
+
     /*
     * Joining a channel/chat
     */
-    $chat = Client::joinChat('lirik');
-    // $chat->addCommand(new TweechCommand);
+    //
+    // foreach($channels as $channel){
+    //     Client::joinChat(strtolower($channel))->read();
+    // }
+
+    $chat = Client::joinChat('raideeeeer');
+    $chat->addCommand(new TestCommand);
     $chat->read();
+
+    // Client::listen('tick.second', function() use($chat){
+    //     $mps = $chat->getMessagesPerSecond();
+    //     if ($mps > 5) {
+    //         echo $chat->getMessagesPerSecond() . "\n";
+    //     }
+    // });
 
 });
 
@@ -27,17 +56,21 @@ Client::whenLogged(function () {
  * @var Raideer\Tweech\Event\ChatMessageEvent
  */
 Client::listen('chat.message', function ($event) {
-    $sender = $event->getSender();
+    // $sender = $event->getSender();
 
-    if ($sender->isSubscribed()) {
-        echo $event->getMessage() . PHP_EOL;
-    }
+    // if ($sender->isSubscribed()) {
+    echo $event->getMessage() . PHP_EOL;
+    // }
 });
 
 Client::listen('chat.subscription', function ($event) {
     if ($event->isResub()) {
-        echo "\n---SOMEONE JUST RESUBSCRIBED---\n\n";
+        echo "\n---{$event->getUser()} JUST RESUBSCRIBED FOR {$event->getMonthsInARow()} MONTHS IN A ROW---\n\n";
     } else {
-        echo "\n---SOMEONE JUST SUBSCRIBED---\n\n";
+        echo "\n---{$event->getUser()} JUST SUBSCRIBED---\n\n";
+    }
+
+    if ($event->getChatName() == 'nmplol') {
+        $event->getChat()->message('nmp1n nmp1n nmp1n nmp1n nmp1n nmp1n nmp1n');
     }
 });
