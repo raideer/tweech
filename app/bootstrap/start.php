@@ -60,7 +60,7 @@ if ($app['config']['app.dailyLogs']) {
     $app['logger']->logToFiles($app['path.storage'].'/logs/tweech.log');
 }
 
-set_error_handler(function ($errno, $errstr, $errfile, $errline) {
+set_error_handler(function ($errno, $errstr, $errfile, $errline) use ($app) {
     echo "[$errno] $errstr in $errfile on line $errline".PHP_EOL;
     $app['logger']->error(
         "[$errno] $errstr in $errfile on line $errline"
