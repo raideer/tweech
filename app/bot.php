@@ -13,41 +13,13 @@ Client::whenLogged(function () {
     */
     Client::registerEventListener(new MotdListener);
 
-    $channels = [
-        'sodapoppin',
-        'lirik',
-        'phantoml0rd',
-        'PsiSyndicate',
-        'AnomalyXd',
-        'Food',
-        'Yogscast',
-        'LyndonFPS',
-        'RiotGames',
-        'MultiplayEsports',
-        'CapcomFighters',
-        'DreadzTV',
-        'CopenhagenGamesCS',
-        'raideeeeer'
-    ];
-
     /*
     * Joining a channel/chat
     */
-    //
-    // foreach($channels as $channel){
-    //     Client::joinChat(strtolower($channel))->read();
-    // }
 
     $chat = Client::joinChat('raideeeeer');
     $chat->addCommand(new TestCommand);
     $chat->read();
-
-    // Client::listen('tick.second', function() use($chat){
-    //     $mps = $chat->getMessagesPerSecond();
-    //     if ($mps > 5) {
-    //         echo $chat->getMessagesPerSecond() . "\n";
-    //     }
-    // });
 
 });
 
@@ -56,21 +28,21 @@ Client::whenLogged(function () {
  * @var Raideer\Tweech\Event\ChatMessageEvent
  */
 Client::listen('chat.message', function ($event) {
-    // $sender = $event->getSender();
-
-    // if ($sender->isSubscribed()) {
-    echo $event->getMessage() . PHP_EOL;
-    // }
+    if ($sender->isSubscribed()) {
+        echo $event->getMessage() . PHP_EOL;
+    }
 });
 
+/*
+ * Listen to the 'chat.subscription' event
+ * @var Raideer\Tweech\Event\NewSubscriptionEvent
+ */
 Client::listen('chat.subscription', function ($event) {
-    if ($event->isResub()) {
-        echo "\n---{$event->getUser()} JUST RESUBSCRIBED FOR {$event->getMonthsInARow()} MONTHS IN A ROW---\n\n";
-    } else {
-        echo "\n---{$event->getUser()} JUST SUBSCRIBED---\n\n";
-    }
-
-    if ($event->getChatName() == 'nmplol') {
-        $event->getChat()->message('nmp1n nmp1n nmp1n nmp1n nmp1n nmp1n nmp1n');
+    if ($event->getChatName() == 'testchannel') {
+        if ($event->isResub()) {
+            $event->getChat()->message("{$event->getUser()} just resubscribed for {$event->getMonths()} in a row!");
+        } else {
+            $event->getChat()->message("{$event->getUser()} just subscribed!");
+        }
     }
 });
