@@ -21,16 +21,16 @@ return [
         /*
         * Specify the twitch username for the bot
         */
-        'username' => 'raideeeeer',
-        // 'username' => 'powerbot5000',
+        // 'username' => 'raideeeeer',
+        'username' => 'powerbot5000',
 
         /*
         * Specify the Twitch chat OAuth password
         *
         * You can get your token here: http://www.twitchapps.com/tmi
         */
-        'oauth' => 'oauth:org68x7wbizbs5pbjc2spdbhxetudc',
-        // 'oauth' => 'oauth:3b7hmz1kqf7ndt9olku1ghvqh7hknw',
+        // 'oauth' => 'oauth:org68x7wbizbs5pbjc2spdbhxetudc',
+        'oauth' => 'oauth:3b7hmz1kqf7ndt9olku1ghvqh7hknw',
 
         /*
         * Irc server information

@@ -28,6 +28,7 @@ Client::whenLogged(function () {
  * @var Raideer\Tweech\Event\ChatMessageEvent
  */
 Client::listen('chat.message', function ($event) {
+    $sender = $event->getSender();
     if ($sender->isSubscribed()) {
         echo $event->getMessage() . PHP_EOL;
     }
